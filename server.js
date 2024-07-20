@@ -1,5 +1,5 @@
 //import express
-const express = require('express')
+const express = require('express');
 const path = require('path');
 
 //create instance of express
@@ -7,6 +7,9 @@ const app = express();
 
 //use app joins to puplic folder
 app.use(express.static('public'));
+
+//to route files
+app.use('/apiRoutes', require('./routes/apiRoutes'));
 
 //set the port
 const PORT = process.env.PORT || 3001;
