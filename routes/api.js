@@ -1,57 +1,31 @@
-const express = require('express');
-const router = express.Router();
+const path = require('path')
 const fs = require('fs');
 const uniqid = require('uniqid');
 
 console.log(`UUID: ${uniqid()}`);
 
+module.exports = (app) => {
 
-//GET notes
-router.get('/notes', (req, res) => {
-    res.sendFile(path.join(__dirname, "../public/notes.html"));
-    fs.readFile('./db/db.json', (err, data) => {
-        if (err) {
-            console.log(err);
-            return res.status(404).json({ message: "note not found"});
-        }
-
-        const notes = JSON.parse(data);
-        res.json(notes);
+    // Grab db.json upon redirect to notes directory.
+    app.get('/api/notes', (req, res) => {
+        res.sendFile(path.join(__dirname, '../db/db.json'));
     });
-});
 
-//get note.html
-router.get('/notes', (req, res) => {
-   
-});
-
-//get index.html
-router.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, "../public/index.html"));
-  });
-
-//POST note
-router.post('/notes', (req, res) => {
-    fs.readFile('./db/db.json', (err, data) => {
-        if (err) {
-            console.log(err);
-            return res.status(404).json({ message: "note not found"});
-        }
-
-        const notes = JSON.parse(data);
-        console.log(req.body);
-        const newNote = {
-            ...req.body,
-            id: uuvidv4(),
+    // 
+    app.post('/api/notes', (req, res) => {
+        let db = fs.readFileSync('./db/db.json');
+        db = JSON.parse(db);
+        res.json(db);
+        // creating body for note
+        let userNote = {
+            title: req.body.title,
+            text: req.body.text,
+            // creating unique id for each note
+            id: uniqid(),
         };
-
-        notes.push(newNote);
-        fs.writeFile('./db/db.json', JSON.stringify(notes), (err) => {
-            console.log(err);
-
-        });
+        // pushing created note to be written in the db.json file
+        db.push(userNote);
+        fs.writeFileSync('db/db.json', JSON.stringify(db));
+        res.json(db);
     });
-});
-
-//export router
-module.exports = router;
+}

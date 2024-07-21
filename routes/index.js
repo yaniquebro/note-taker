@@ -1,10 +1,13 @@
-const router = require('express').Router();
-const htmlRoutes = require('./html');
-const apiRoutes = require('./api');
+const path = require('path');
 
-// Middleware routing
-router.use('./api', apiRoutes);
-router.use('/', htmlRoutes);
+// Export app for routes
+module.exports = (app) => {
 
-// Export router
-module.exports = router;
+// Uses directory to serve html file based off of URL
+app.get('/notes', (req, res) =>
+  res.sendFile(path.join(__dirname, '../public/notes.html'))
+);
+app.get('*', (req, res) =>
+  res.sendFile(path.join(__dirname, '../public/index.html'))
+);
+};
