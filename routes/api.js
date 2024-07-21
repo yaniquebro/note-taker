@@ -8,6 +8,7 @@ console.log(`UUID: ${uniqid()}`);
 
 //GET notes
 router.get('/notes', (req, res) => {
+    res.sendFile(path.join(__dirname, "../public/notes.html"));
     fs.readFile('./db/db.json', (err, data) => {
         if (err) {
             console.log(err);
@@ -21,7 +22,7 @@ router.get('/notes', (req, res) => {
 
 //get note.html
 router.get('/notes', (req, res) => {
-    res.sendFile(path.join(__dirname, "../public/notes.html"));
+   
 });
 
 //get index.html
