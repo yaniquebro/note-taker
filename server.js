@@ -15,7 +15,7 @@ app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-require('./routes/apiRoutes')(app);
+require('./routes/api')(app);
 require('./routes/index')(app);
 
 // listen for port
