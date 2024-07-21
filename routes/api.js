@@ -5,8 +5,6 @@ const uniqid = require('uniqid');
 
 console.log(`UUID: ${uniqid()}`);
 
-//export router
-module.exports = router;
 
 //GET notes
 router.get('/notes', (req, res) => {
@@ -20,6 +18,16 @@ router.get('/notes', (req, res) => {
         res.json(notes);
     });
 });
+
+//get note.html
+router.get('/notes', (req, res) => {
+    res.sendFile(path.join(__dirname, "../public/notes.html"));
+});
+
+//get index.html
+router.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, "../public/index.html"));
+  });
 
 //POST note
 router.post('/notes', (req, res) => {
@@ -43,3 +51,6 @@ router.post('/notes', (req, res) => {
         });
     });
 });
+
+//export router
+module.exports = router;
