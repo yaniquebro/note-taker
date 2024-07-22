@@ -9,3 +9,6 @@ This assignment uses node and express.js to create a note taking app. This app c
 https://note-takerr.onrender.com/
 
 ## Screenshots 
+
+<img width="2240" alt="Screenshot 2024-07-21 at 8 35 41 PM" src="https://github.com/user-attachments/assets/79ae4e6d-3f82-49de-9715-f4df3126e194">
+<img width="2240" alt="Screenshot 2024-07-21 at 8 35 58 PM" src="https://github.com/user-attachments/assets/d8c7614b-d7c7-4e52-9d68-c72490bdad7a">
